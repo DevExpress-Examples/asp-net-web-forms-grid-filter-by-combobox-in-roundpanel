@@ -6,6 +6,9 @@ using System.Web.UI.WebControls;
 using DevExpress.Web;
 
 public partial class _Default : System.Web.UI.Page {
-    protected void Page_Load(object sender, EventArgs e) {
-     }
+    protected void ASPxComboBoxCategoriesInHeader_Init(object sender, EventArgs e) {
+        var cb = (ASPxComboBox)sender;
+        ControlParameter controlParameter = (ControlParameter)SqlDataSourceProducts3.SelectParameters[0];
+        controlParameter.ControlID = cb.UniqueID;
+    }
 }
