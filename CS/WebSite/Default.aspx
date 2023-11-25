@@ -39,6 +39,22 @@
                             </PanelCollection>
                         </dx:ASPxRoundPanel>
                     </td>
+                    <td>
+                        <dx:ASPxRoundPanel ID="ASPxRoundPanel3" runat="server" Width="300px" HeaderText="Naming Container">
+                        <HeaderTemplate>
+                            <dx:ASPxLabel ID="ASPxLabelCaption3" runat="server" Text="Select Category" />
+                            <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInHeader2" runat="server" ValueField="CategoryID"
+                                TextField="CategoryName" ValueType="System.Int32" DataSourceID="SqlDataSourceCategories"
+                                AutoPostBack="True" OnInit="ASPxComboBoxCategoriesInHeader_Init">
+                            </dx:ASPxComboBox>
+                        </HeaderTemplate>
+                        <PanelCollection>
+                            <dx:PanelContent ID="MainPanelContent" runat="server">
+                                <dx:ASPxGridView ID="ASPxGridViewProducts" runat="server" DataSourceID="SqlDataSourceProducts3" />
+                            </dx:PanelContent>
+                        </PanelCollection>
+                    </dx:ASPxRoundPanel>
+                    </td>
                 </tr>
             </table>
 
@@ -59,6 +75,13 @@
             <SelectParameters>
                 <asp:ControlParameter ControlID="ASPxRoundPanel2$HTC$TC$ASPxComboBoxCategoriesInHeader"
                     Name="CategoryID" PropertyName="Value" Type="Int32" />
+            </SelectParameters>
+        </asp:SqlDataSource>
+
+        <asp:SqlDataSource ID="SqlDataSourceProducts3" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>"
+            SelectCommand="SELECT [ProductID], [ProductName], [CategoryID], [UnitPrice], [Discontinued] FROM [Products] WHERE ([CategoryID] = @CategoryID)">
+            <SelectParameters>
+                <asp:ControlParameter Name="CategoryID" PropertyName="Value" Type="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
     </form>
