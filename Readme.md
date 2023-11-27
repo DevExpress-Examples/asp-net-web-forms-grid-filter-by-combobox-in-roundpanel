@@ -8,32 +8,26 @@
 **[[Run Online]](https://codecentral.devexpress.com/e2040/)**
 <!-- run online end -->
 
-This example demonstrates how to use [ASPxComboBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxComboBox) placed in the [ASPxRoundPanel](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxRoundPanel) control to filter [ASPxGridView](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridView). The grid is bound to **SqlDataSource**. The `ControlParameter` is passed to the `SqlDataSource` from an external `ASPxComboBox`. 
+This example demonstrates how to use [ASPxComboBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxComboBox) placed in the [ASPxRoundPanel](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxRoundPanel) control to filter [ASPxGridView](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridView) data. The grid is bound to **SqlDataSource**. The `ControlParameter` is passed to the `SqlDataSource` from the `ASPxComboBox` control. 
 
 ## Implementation Details
 
-In this example, [ASPxRoundPanel](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxRoundPanel) contains [ASPxComboBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxComboBox). When a user selects a value in the combobox, its value is applied as a control parameter to the datasource. 
+In this example, [ASPxRoundPanel](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxRoundPanel) contains [ASPxComboBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxComboBox). When a user selects a value in the combobox, the value is applied to the datasource as a control parameter. 
 
-The example demonstrates how to specify the `ControlParameter`'s `ControlID` property in markup and at runtime.
+You can specify the `ControlParameter`'s `ControlID` property in markup and at runtime.
 
 ### Specify ControlID property in markup
 
-Use the following syntax to find `ASPxComboBox` inside the `ASPxRoundPanel`: `{containerID}${controlID}`
+Use the following syntax to access `ASPxComboBox` inside the `ASPxRoundPanel`: `{containerID}${controlID}`
 
 ```aspx
-<dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="300px" HeaderText="Naming Container">
+<dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" ... >
     <PanelCollection>
         <dx:PanelContent ID="PanelContent1" runat="server">
-            <dx:ASPxLabel ID="ASPxLabelCaption1" runat="server" Text="Select Category" />
-            <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInContent" runat="server" ValueField="CategoryID" TextField="CategoryName" 
-                ValueType="System.Int32" DataSourceID="SqlDataSourceCategories" AutoPostBack="True">
-            </dx:ASPxComboBox>
-            <dx:ASPxGridView ID="ASPxGridView1" runat="server" DataSourceID="SqlDataSourceProducts1" />
-        </dx:PanelContent>
-    </PanelCollection>
+            <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInContent" runat="server" ... />
+            ...
 </dx:ASPxRoundPanel>
-<asp:SqlDataSource ID="SqlDataSourceProducts1" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>"
-    SelectCommand="SELECT [ProductID], [ProductName], [CategoryID], [UnitPrice], [Discontinued] FROM [Products] WHERE ([CategoryID] = @CategoryID)">
+<asp:SqlDataSource ID="SqlDataSourceProducts1" runat="server" ... >
     <SelectParameters>
         <asp:ControlParameter ControlID="ASPxRoundPanel1$ASPxComboBoxCategoriesInContent" Name="CategoryID" PropertyName="Value" Type="Int32" />
     </SelectParameters>
@@ -43,22 +37,13 @@ Use the following syntax to find `ASPxComboBox` inside the `ASPxRoundPanel`: `{c
 If `ASPxComboBox` is palced inside a `TemplateControl`, the `ControlID` property contains additional markers:
 
 ```aspx
-<dx:ASPxRoundPanel ID="ASPxRoundPanel2" runat="server" Width="300px" HeaderText="Naming Container">
+<dx:ASPxRoundPanel ID="ASPxRoundPanel2" runat="server" ...>
     <HeaderTemplate>
-        <dx:ASPxLabel ID="ASPxLabelCaption2" runat="server" Text="Select Category" />
-        <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInHeader" runat="server" ValueField="CategoryID"  TextField="CategoryName" 
-            ValueType="System.Int32" DataSourceID="SqlDataSourceCategories" AutoPostBack="True">
-        </dx:ASPxComboBox>
-    </HeaderTemplate>
-    <PanelCollection>
-        <dx:PanelContent ID="PanelContent2" runat="server">
-            <dx:ASPxGridView ID="ASPxGridView2" runat="server" DataSourceID="SqlDataSourceProducts2" />
-        </dx:PanelContent>
-    </PanelCollection>
+        <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInHeader" runat="server" ... />
+        ...
 </dx:ASPxRoundPanel>
 
-<asp:SqlDataSource ID="SqlDataSourceProducts2" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>"
-    SelectCommand="SELECT [ProductID], [ProductName], [CategoryID], [UnitPrice], [Discontinued] FROM [Products] WHERE ([CategoryID] = @CategoryID)">
+<asp:SqlDataSource ID="SqlDataSourceProducts2" runat="server" ... >
     <SelectParameters>
         <asp:ControlParameter ControlID="ASPxRoundPanel2$HTC$TC$ASPxComboBoxCategoriesInHeader" Name="CategoryID" PropertyName="Value" Type="Int32" />
     </SelectParameters>
@@ -67,7 +52,7 @@ If `ASPxComboBox` is palced inside a `TemplateControl`, the `ControlID` property
 
 ### Specify ControlID property at runtime
 
-When `ASPxComboBox` is inside `TemplateControl` it can be difficult to correctly build the `ControlID` property manually. In this case, you can determine the `ControlID` property value at runtime. The `ControlParameter`'s `ControlID` property equals the `UniqueID` property of an external `ASPxComboBox`.
+When `ASPxComboBox` is inside a `TemplateControl` it can be difficult to correctly specify the `ControlID` property manually. In this case, you can determine the `ControlID` property value at runtime. The `ControlParameter`'s `ControlID` property equals the `UniqueID` property of an external `ASPxComboBox`.
 
 ```csharp
 protected void ASPxComboBoxCategoriesInHeader_Init(object sender, EventArgs e) {
@@ -78,23 +63,13 @@ protected void ASPxComboBoxCategoriesInHeader_Init(object sender, EventArgs e) {
 ```
 
 ```aspx
-<dx:ASPxRoundPanel ID="ASPxRoundPanel3" runat="server" Width="300px" HeaderText="Naming Container">
+<dx:ASPxRoundPanel ID="ASPxRoundPanel3" runat="server" ... >
     <HeaderTemplate>
-        <dx:ASPxLabel ID="ASPxLabelCaption3" runat="server" Text="Select Category" />
-        <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInHeader2" runat="server" ValueField="CategoryID"
-            TextField="CategoryName" ValueType="System.Int32" DataSourceID="SqlDataSourceCategories"
-            AutoPostBack="True" OnInit="ASPxComboBoxCategoriesInHeader_Init">
-        </dx:ASPxComboBox>
-    </HeaderTemplate>
-    <PanelCollection>
-        <dx:PanelContent ID="MainPanelContent" runat="server">
-            <dx:ASPxGridView ID="ASPxGridViewProducts" runat="server" DataSourceID="SqlDataSourceProducts3" />
-        </dx:PanelContent>
-    </PanelCollection>
+        <dx:ASPxComboBox ID="ASPxComboBoxCategoriesInHeader2" runat="server" OnInit="ASPxComboBoxCategoriesInHeader_Init" ... />
+        ...
 </dx:ASPxRoundPanel>
 
-<asp:SqlDataSource ID="SqlDataSourceProducts3" runat="server" ConnectionString="<%$ ConnectionStrings:NorthwindConnectionString %>"
-    SelectCommand="SELECT [ProductID], [ProductName], [CategoryID], [UnitPrice], [Discontinued] FROM [Products] WHERE ([CategoryID] = @CategoryID)">
+<asp:SqlDataSource ID="SqlDataSourceProducts3" runat="server" ... >
     <SelectParameters>
         <asp:ControlParameter Name="CategoryID" PropertyName="Value" Type="Int32" />
     </SelectParameters>
