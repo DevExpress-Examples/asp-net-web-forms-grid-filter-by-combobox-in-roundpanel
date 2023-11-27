@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 
-# Grid View for ASP.NET Web Forms - How to access a control placed in TemplateControl to filter a grid bound to SqlDataSource
+# Grid View for ASP.NET Web Forms - How to use an external ASPxComboBox in ASPxRoundPanel to filter a grid
 <!-- run online -->
 **[[Run Online]](https://codecentral.devexpress.com/e2040/)**
 <!-- run online end -->
@@ -18,7 +18,7 @@ You can specify the `ControlParameter`'s `ControlID` property in markup and at r
 
 ### Specify ControlID property in markup
 
-Use the following syntax to access `ASPxComboBox` inside the `ASPxRoundPanel`: `{containerID}${controlID}`
+Use the following syntax to access `ASPxComboBox` inside `ASPxRoundPanel`: **{containerID}${controlID}**.
 
 ```aspx
 <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" ... >
@@ -34,7 +34,7 @@ Use the following syntax to access `ASPxComboBox` inside the `ASPxRoundPanel`: `
 </asp:SqlDataSource>
 ```
 
-If `ASPxComboBox` is palced inside a `TemplateControl`, the `ControlID` property contains additional markers:
+If `ASPxComboBox` is palced inside a `TemplateControl`, the `ControlID` property should contain additional markers.
 
 ```aspx
 <dx:ASPxRoundPanel ID="ASPxRoundPanel2" runat="server" ...>
