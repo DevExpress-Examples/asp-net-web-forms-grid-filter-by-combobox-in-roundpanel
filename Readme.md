@@ -34,7 +34,7 @@ Use the following syntax to access `ASPxComboBox` inside `ASPxRoundPanel`: **{co
 </asp:SqlDataSource>
 ```
 
-If `ASPxComboBox` is palced inside a `TemplateControl`, the `ControlID` property should contain additional markers.
+If `ASPxComboBox` is placed inside a `TemplateControl`, the `ControlID` property should contain additional markers.
 
 ```aspx
 <dx:ASPxRoundPanel ID="ASPxRoundPanel2" runat="server" ...>
