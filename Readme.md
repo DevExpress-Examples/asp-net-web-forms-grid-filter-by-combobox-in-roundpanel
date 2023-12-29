@@ -5,9 +5,6 @@
 <!-- default badges end -->
 
 # Grid View for ASP.NET Web Forms - How to use an external ASPxComboBox in ASPxRoundPanel to filter a grid
-<!-- run online -->
-**[[Run Online]](https://codecentral.devexpress.com/128540188/)**
-<!-- run online end -->
 
 This example demonstrates how to use [ASPxComboBox](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxComboBox) placed in the [ASPxRoundPanel](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxRoundPanel) control to filter [ASPxGridView](https://docs.devexpress.com/AspNet/DevExpress.Web.ASPxGridView) data. The grid is bound to **SqlDataSource**. The `ControlParameter` is passed to the `SqlDataSource` from the `ASPxComboBox` control. 
 
